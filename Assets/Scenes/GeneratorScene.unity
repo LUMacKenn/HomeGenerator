@@ -322,7 +322,7 @@ GameObject:
   - component: {fileID: 1953732318}
   - component: {fileID: 1953732317}
   m_Layer: 0
-  m_Name: Layout Generator
+  m_Name: Home Generator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -346,6 +346,7 @@ MonoBehaviour:
   tileFloor: {fileID: 4321056929760304910, guid: c045cdc0aee6340768b1e2de8ad2d807, type: 3}
   tileWall: {fileID: 862527094559833302, guid: 7914132fcfdce431b883c041c10f4f77, type: 3}
   tileWallCorner: {fileID: 5224993104449871344, guid: 2ccb91d489a9f4a2bb60542ce543c0d7, type: 3}
+  tileWallDoorway: {fileID: 1632163859708327742, guid: 187d90cde33354fd68a313f361de6bf2, type: 3}
 --- !u!4 &1953732318
 Transform:
   m_ObjectHideFlags: 0

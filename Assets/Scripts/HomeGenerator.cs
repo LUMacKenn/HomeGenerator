@@ -11,6 +11,7 @@ public class HomeGenerator : MonoBehaviour
     public GameObject tileFloor;
     public GameObject tileWall;
     public GameObject tileWallCorner;
+    public GameObject tileWallDoorway;
 
     // Start is called before the first frame update
     void Start()
@@ -51,6 +52,9 @@ public class HomeGenerator : MonoBehaviour
                         break;
                     case 2:
                         Instantiate(tileWallCorner, pos, rot);
+                        break;
+                    case 3:
+                        Instantiate(tileWallDoorway, pos, rot);
                         break;
                     default:
                         break;

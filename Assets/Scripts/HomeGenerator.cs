@@ -12,7 +12,6 @@ public class HomeGenerator : MonoBehaviour
     public GameObject tileWall;
     public GameObject tileWallCorner;
     public GameObject tileWallDoorway;
-
     // Start is called before the first frame update
     void Start()
     {

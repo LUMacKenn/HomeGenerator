@@ -1,24 +1,3 @@
-# tile_rules = {
-#     "tileFloor": {
-#         "posX": [("tileFloor", 0), ("tileWall", 0)],
-#         "negX": [("tileFloor", 0), ("tileWall", 0)],
-#         "posZ": [("tileFloor", 0)],
-#         "negZ": [("tileFloor", 0), ("tileWall", 0)],
-#     },
-#     "tileWall": {
-#         "posX": [("tileWall", 0)],
-#         "negX": [("tileWall", 0)],
-#         "posZ": [("tileFloor", 0), ("tileWall", 2)],
-#         "negZ": [("tileWall", 2)],
-#     },
-#     "tileWallCorner": {
-#         "posX": [("tileWall", 0)],
-#         "negX": [],
-#         "posZ": [("tileFloor", 0), ("tileWall", )],
-#         "negZ": [("tileWall", 2)],
-#     },
-# }
-
 tile_rules = {
     "tileFloor": {
         "tileNum": 0,

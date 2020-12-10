@@ -6,6 +6,8 @@ public class HomeGenerator : MonoBehaviour
 {
 
     int[,] layoutModel;
+    int[,] boundaries; 
+    int[,] lampLayoutModel; 
     public int maxHeight = 10, maxWidth = 10, tileSize = 10;
 
     public GameObject tileFloor;
@@ -13,12 +15,19 @@ public class HomeGenerator : MonoBehaviour
     public GameObject tileWallCorner;
     public GameObject tileWallOutsideCorner;
     public GameObject tileWallDoorway;
+    public GameObject lamp; 
     // Start is called before the first frame update
     void Start()
     {
+        //Debug.Log("hello start")
         layoutModel = GridGenerator.GenerateLayout(maxWidth, maxHeight);
-        layoutModel = GridGenerator.ReadLayoutFromFile("yey");
+        layoutModel = GridGenerator.ReadLayoutFromFile("layout2.txt");
+        lampLayoutModel = GridGenerator.ReadLayoutFromFile("lampLayout.txt");
+        boundaries = GridGenerator.SetBoundaries(maxWidth, maxHeight); 
         DisplayLayout(layoutModel);
+        DisplayLayout(boundaries);
+        DisplayFurniture(lampLayoutModel); 
+        //DisplayFurniture()
     }
 
     void DisplayLayout(int[,] layoutModel) {
@@ -63,6 +72,19 @@ public class HomeGenerator : MonoBehaviour
                     default:
                         break;
                 }
+            }
+        }
+    }
+
+    void DisplayFurniture(int[,] layout) {
+        for (int i = 0; i < layout.GetLength(0); i++) {
+            for (int j = 0; j < layout.GetLength(1); j++) {
+                int hasLamp = layout[i, j]; 
+                if (hasLamp == 1) {
+                    Vector3 pos = new Vector3(i * tileSize - 5 , (float) 0.5, j * tileSize - 5);
+                    Instantiate(lamp, pos, Quaternion.identity);
+                }
+      
             }
         }
     }

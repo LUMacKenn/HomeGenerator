@@ -18,12 +18,14 @@ grid = {}
 for i in range(width):
     for j in range(height):
         for k in range(num_tiles):
-            grid[i,j,k] = model.NewBoolVar(f"[{i},{j}]:{k}")
+            # grid[i,j,k] = model.NewBoolVar(f"[{i},{j}]:{k}")
+            grid[i,j,k] = model.NewBoolVar("hi")
 
 # Exactly one true boolean per 2D grid space
 for i in range(width):
     for j in range(height):
-        num_tiles_in_spot = model.NewIntVar(0, num_tiles, f"num_tiles[{i}][{j}]")
+        # num_tiles_in_spot = model.NewIntVar(0, num_tiles, f"num_tiles[{i}][{j}]")
+        num_tiles_in_spot = model.NewIntVar(0, num_tiles, "hi")
         num_tiles_in_spot = sum([grid[i,j,k] for k in range(num_tiles)])
         model.Add(num_tiles_in_spot == 1)
 
@@ -45,15 +47,16 @@ for i in range(width):
 model.Add(grid[0,0,13] == True)
 
 if solver.Solve(model) in [cp_model.FEASIBLE, cp_model.OPTIMAL]:
-    # file = open("../Assets/Layouts/layout.txt", "w")
+    #file = open("../Assets/Layouts/layout.txt", "w")
     for j in range(height):
         line = ""
         for i in range(width):
             for k in range(num_tiles):
                 if solver.Value(grid[i,j,k]) == 1:
-                    line += f"{k} "
+                    line += "%s " % (k)
+                    # line += f"{k} "
         print(line)
-        # file.write(line)
-    # file.close()
+        #file.write(line)
+    #file.close()
 else:
     print("Not Feasible")

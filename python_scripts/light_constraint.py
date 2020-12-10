@@ -8,7 +8,7 @@ grid = {}
 
 width = 10
 height = 10
-max_lamps = 8
+max_lamps = 5
 
 for i in range(width): 
     for j in range(height): 
@@ -61,7 +61,7 @@ lightScore = {}
 for i in range(width): 
     for j in range(height): 
         hasLamp[i, j] = model.NewBoolVar("hasLamp[%s, %s]" % (i, j))
-        lightScore[i, j] = model.NewBoolVar("lightScore[%s, %s]" % (i, j))
+        # lightScore[i, j] = model.NewBoolVar("lightScore[%s, %s]" % (i, j))
 
 SAME_TILE_SCORE = 50
 RADIUS_ONE_SCORE = 20
@@ -80,6 +80,8 @@ for i in range(width):
         model.Add(same_place_score == SAME_TILE_SCORE).OnlyEnforceIf(hasLamp[i, j])
         model.Add(same_place_score == 0).OnlyEnforceIf(hasLamp[i, j].Not())
         scores.append(same_place_score)
+
+        # model.Add(hasLamp)
         # check first radius 
         if currPos["wallTop"] is False: 
             # print("%s, %s,: reached" % (i, j))
@@ -112,15 +114,15 @@ for i in range(width):
 sum_lamps = model.NewIntVar(0, width*height, "sum_lamps")
 model.Add(sum_lamps == sum(hasLamp[i, j] for i in range(width) for j in range(height)))
 model.Add(sum_lamps == max_lamps)
-
 model.Maximize(total_score)
         
 if solver.Solve(model) in [cp_model.FEASIBLE, cp_model.OPTIMAL]:
+    # print(solver.Value(lightScore[1,1]))
     #file = open("../Assets/Layouts/layout.txt", "w")
     for i in range(width): 
         line = ""
         for j in range(height): 
-            if solver.Value(hasLamp[i, j] == 1): 
+            if solver.Value(hasLamp[i, j]) == 1: 
                 line += "1 "
             else: 
                 line += "0 "

@@ -311,9 +311,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 1314305821}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df677178442bb43e794471961d621f72, type: 3}
+  m_Script: {fileID: 11500000, guid: 436275a13d4459746955fc6db5953473, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _active: 1
+  _enableRotation: 1
+  _mouseSense: 4
+  _enableTranslation: 1
+  _translationSpeed: 55
+  _enableMovement: 1
+  _movementSpeed: 30
+  _boostedSpeed: 50
+  _boostSpeed: 9
+  _moveUp: 32
+  _moveDown: 304
+  _enableSpeedAcceleration: 1
+  _speedAccelerationFactor: 1.5
+  _initPositonButton: 114
 --- !u!1 &1784358878
 GameObject:
   m_ObjectHideFlags: 0

@@ -304,13 +304,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1784358878}
-  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
+  m_LocalRotation: {x: 0.39044833, y: 0.34682897, z: -0.161729, w: 0.8373192}
   m_LocalPosition: {x: 5, y: 6.44766, z: 5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+  m_LocalEulerAnglesHint: {x: 50, y: 45, z: 0}
 --- !u!1 &1953732316
 GameObject:
   m_ObjectHideFlags: 0
@@ -347,6 +347,7 @@ MonoBehaviour:
   tileWall: {fileID: 862527094559833302, guid: 7914132fcfdce431b883c041c10f4f77, type: 3}
   tileWallCorner: {fileID: 5224993104449871344, guid: 2ccb91d489a9f4a2bb60542ce543c0d7, type: 3}
   tileWallDoorway: {fileID: 1632163859708327742, guid: 187d90cde33354fd68a313f361de6bf2, type: 3}
+  chairWithFloor: {fileID: 0}
 --- !u!4 &1953732318
 Transform:
   m_ObjectHideFlags: 0

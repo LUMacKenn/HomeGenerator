@@ -71,6 +71,9 @@ public class FlyCamera : MonoBehaviour {
         if (Input.GetKey (KeyCode.D)){
             p_Velocity += new Vector3(1, 0, 0);
         }
+        if (Input.GetKey (KeyCode.Escape)){
+            UnityEditor.EditorApplication.isPlaying = false;
+        }
         return p_Velocity;
     }
 }

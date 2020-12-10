@@ -57,6 +57,8 @@ for k in range(num_tiles):
 
 # To break symmetry
 model.AddHint(grid[randrange(0, width), randrange(0, height), randrange(0, num_tiles)], True)
+# model.Add(grid[0,0,8] == True)
+# model.Add(grid[1,0,4] == True)
 
 if solver.Solve(model) in [cp_model.FEASIBLE, cp_model.OPTIMAL]:
     # file = open("../Assets/Layouts/layout.txt", "w")

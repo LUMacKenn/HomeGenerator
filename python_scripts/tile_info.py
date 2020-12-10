@@ -118,7 +118,6 @@ def create_adjacency_mappings():
             for neighbor_list in neighbor_lists_rotated:
                 single_rotation_neighbors = []
                 # Loop through all possible neighbor tile types in a single direction
-
                 for neighbor_key, neighbor_rotations in neighbor_list.items():
                     neighbor_base_tilenum = tile_rules[neighbor_key]["tileNum"] * 4
                     # Loop through all rotation types of a single tile type: O(1)

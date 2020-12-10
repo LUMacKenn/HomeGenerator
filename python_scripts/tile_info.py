@@ -45,7 +45,6 @@ tile_rules = {
         "tileNum": 2,
         "neighbors": {
             "posX": {
-                # "tileFloor": [0,1,2,3],
                 "tileWall": [0],
                 "tileWallCorner": [3],
             },
@@ -54,7 +53,6 @@ tile_rules = {
                 "tileWallCorner": [2,3],
             },
             "posZ": {
-                # "tileFloor": [0,1,2,3],
                 "tileWall": [1],
                 "tileWallCorner": [1],
             },
@@ -64,74 +62,6 @@ tile_rules = {
             },
         },
     },
-}
-
-tile_rules2 = {
-    "tileFloor": {
-        "tileNum": 0,
-        "neighbors": {
-            "posX": {
-                "tileFloor": [0,1,2,3],
-                # "tileWall": [3],
-            },
-            "negX": {
-                "tileFloor": [0,1,2,3],
-                # "tileWall": [1],
-            },
-            "posZ": {
-                "tileFloor": [0,1,2,3],
-                # "tileWall": [2],
-            },
-            "negZ": {
-                "tileFloor": [0,1,2,3],
-                # "tileWall": [0],
-            },
-        },
-    },
-    # "tileWall": {
-    #     "tileNum": 1,
-    #     "neighbors": {
-    #         "posX": {
-    #             "tileWall": [0],
-    #             "tileWallCorner": [3],
-    #         },
-    #         "negX": {
-    #             "tileWall": [0],
-    #             "tileWallCorner": [0],
-    #         },
-    #         "posZ": {
-    #             "tileFloor": [0,1,2,3],
-    #             "tileWall": [2],
-    #         },
-    #         "negZ": {
-    #             "tileWall": [2],
-    #             "tileWallCorner": [1,2],
-    #         },
-    #     },
-    # },
-    # "tileWallCorner": {
-    #     "tileNum": 2,
-    #     "neighbors": {
-    #         "posX": {
-    #             # "tileFloor": [0,1,2,3],
-    #             "tileWall": [0],
-    #             "tileWallCorner": [3],
-    #         },
-    #         "negX": {
-    #             "tileWall": [3],
-    #             "tileWallCorner": [2,3],
-    #         },
-    #         "posZ": {
-    #             # "tileFloor": [0,1,2,3],
-    #             "tileWall": [1],
-    #             "tileWallCorner": [1],
-    #         },
-    #         "negZ": {
-    #             "tileWall": [2],
-    #             "tileWallCorner": [1,2],
-    #         },
-    #     },
-    # },
 }
 
 def create_adjacency_mappings():
@@ -157,7 +87,7 @@ def create_adjacency_mappings():
                     neighbor_base_tilenum = tile_rules[neighbor_key]["tileNum"] * 4
                     # Loop through all rotation types of a single tile type: O(1)
                     for neighbor_rotation in neighbor_rotations:
-                        neighbor_variant = neighbor_base_tilenum + neighbor_rotation
+                        neighbor_variant = neighbor_base_tilenum + (neighbor_rotation - 1) % 4
                         single_rotation_neighbors.append(neighbor_variant)
                 mapping["neighbors"].append(single_rotation_neighbors)
 

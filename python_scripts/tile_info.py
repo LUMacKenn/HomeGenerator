@@ -78,17 +78,19 @@ def create_adjacency_mappings():
                 "neighbors" : []
             }
             variant_num = tile_num * 4 + rotation
-            neighbor_lists = neighbor_lists[rotation:] + neighbor_lists[:rotation]
+            neighbor_lists_rotated = neighbor_lists[rotation:] + neighbor_lists[:rotation]
             # Loop through all four directions in the list of lists of neighbors: O(1)
-            for neighbor_list in neighbor_lists:
+            # print(neighbor_lists)
+            for neighbor_list in neighbor_lists_rotated:
                 single_rotation_neighbors = []
                 # Loop through all possible neighbor tile types in a single direction
+
                 for neighbor_key, neighbor_rotations in neighbor_list.items():
                     neighbor_base_tilenum = tile_rules[neighbor_key]["tileNum"] * 4
                     # Loop through all rotation types of a single tile type: O(1)
                     for neighbor_rotation in neighbor_rotations:
-                        neighbor_variant = neighbor_base_tilenum + (neighbor_rotation - 1) % 4
-                        single_rotation_neighbors.append(neighbor_variant)
+                        rotated_neighbor_variant = neighbor_base_tilenum + (neighbor_rotation + rotation) % 4
+                        single_rotation_neighbors.append(rotated_neighbor_variant)
                 mapping["neighbors"].append(single_rotation_neighbors)
 
             adjacency_mappings[variant_num] = mapping

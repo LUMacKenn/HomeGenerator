@@ -32,10 +32,10 @@ public static class GridGenerator
         int width = lines[0].Trim().Split(' ').Length;
 
         int[,] layoutModel = new int[height, width];
-        for (int j = 0; j < height; j++) {
-            string[] chars = lines[j].Trim().Split(' ');
-            for (int i = 0; i < width; i++) {
-                int tileNum = int.Parse(chars[i]);
+        for (int i = 0; i < width; i++) {
+            string[] chars = lines[i].Trim().Split(' ');
+            for (int j = 0; j < height; j++) {
+                int tileNum = int.Parse(chars[j]);
                 layoutModel[i,j] = tileNum;
             }
         }

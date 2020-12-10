@@ -62,6 +62,9 @@ public class HomeGenerator : MonoBehaviour
                     case 3:
                         Instantiate(tileWallOutsideCorner, pos, rot);
                         break;
+                    case 4:
+                        Instantiate(tileWallDoorway, pos, rot);
+                        break;
                     default:
                         break;
                 }

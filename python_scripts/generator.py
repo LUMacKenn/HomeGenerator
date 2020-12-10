@@ -46,7 +46,7 @@ for k in range(num_tiles):
         for j in range(height)
     )
     # type_of_each.append(num_occurances_of_type)
-    model.Add(num_occurances_of_type <= 40)
+    model.Add(num_occurances_of_type <= 7)
 # avg = sum(type_of_each)/len(type_of_each)
 # avg = model.NewIntVar(0, width * height, "")
 # sum1 = sum(type_of_each)
@@ -57,14 +57,18 @@ for k in range(num_tiles):
 
 # To break symmetry
 model.AddHint(grid[randrange(0, width), randrange(0, height), randrange(0, num_tiles)], True)
+model.AddHint(grid[randrange(0, width), randrange(0, height), randrange(0, num_tiles)], True)
+model.AddHint(grid[randrange(0, width), randrange(0, height), randrange(0, num_tiles)], True)
+model.AddHint(grid[randrange(0, width), randrange(0, height), randrange(0, num_tiles)], True)
+model.AddHint(grid[randrange(0, width), randrange(0, height), randrange(0, num_tiles)], True)
 # model.Add(grid[0,0,8] == True)
 # model.Add(grid[1,0,4] == True)
 
 if solver.Solve(model) in [cp_model.FEASIBLE, cp_model.OPTIMAL]:
     # file = open("../Assets/Layouts/layout.txt", "w")
-    for j in range(height):
+    for i in range(width):
         line = ""
-        for i in range(width):
+        for j in range(height):
             for k in range(num_tiles):
                 if solver.Value(grid[i,j,k]) == 1:
                     line += f"{k} "

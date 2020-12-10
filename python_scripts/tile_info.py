@@ -5,18 +5,22 @@ tile_rules = {
             "posX": {
                 "tileFloor": [0,1,2,3],
                 "tileWall": [3],
+                "tileWallOutsideCorner": [0,3],
             },
             "negX": {
                 "tileFloor": [0,1,2,3],
                 "tileWall": [1],
+                "tileWallOutsideCorner": [1,2],
             },
             "posZ": {
                 "tileFloor": [0,1,2,3],
                 "tileWall": [2],
+                "tileWallOutsideCorner": [0,1],
             },
             "negZ": {
                 "tileFloor": [0,1,2,3],
                 "tileWall": [0],
+                "tileWallOutsideCorner": [2,3],
             },
         },
     },
@@ -26,14 +30,17 @@ tile_rules = {
             "posX": {
                 "tileWall": [0],
                 "tileWallCorner": [3],
+                "tileWallOutsideCorner": [1],
             },
             "negX": {
                 "tileWall": [0],
                 "tileWallCorner": [0],
+                "tileWallOutsideCorner": [0],
             },
             "posZ": {
                 "tileFloor": [0,1,2,3],
                 "tileWall": [2],
+                "tileWallOutsideCorner": [2,3],
             },
             "negZ": {
                 "tileWall": [2],
@@ -47,6 +54,7 @@ tile_rules = {
             "posX": {
                 "tileWall": [0],
                 "tileWallCorner": [3],
+                "tileWallOutsideCorner": [1],
             },
             "negX": {
                 "tileWall": [3],
@@ -55,10 +63,36 @@ tile_rules = {
             "posZ": {
                 "tileWall": [1],
                 "tileWallCorner": [1],
+                "tileWallOutsideCorner": [1],
             },
             "negZ": {
                 "tileWall": [2],
                 "tileWallCorner": [1,2],
+            },
+        },
+    },
+    "tileWallOutsideCorner": {
+        "tileNum": 3,
+        "neighbors": {
+            "posX": {
+                "tileWall": [0],
+                "tileWallCorner": [3],
+                "tileWallOutsideCorner": [1],
+            },
+            "negX": {
+                "tileFloor": [0,1,2,3],
+                "tileWall": [1],
+                "tileWallOutsideCorner": [1,2],
+            },
+            "posZ": {
+                "tileFloor": [0,1,2,3],
+                "tileWall": [2],
+                "tileWallOutsideCorner": [2,3],
+            },
+            "negZ": {
+                "tileWall": [3],
+                "tileWallCorner": [3],
+                "tileWallOutsideCorner": [3],
             },
         },
     },

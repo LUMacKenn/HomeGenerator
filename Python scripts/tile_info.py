@@ -66,10 +66,76 @@ tile_rules = {
     },
 }
 
+tile_rules2 = {
+    "tileFloor": {
+        "tileNum": 0,
+        "neighbors": {
+            "posX": {
+                "tileFloor": [0,1,2,3],
+                # "tileWall": [3],
+            },
+            "negX": {
+                "tileFloor": [0,1,2,3],
+                # "tileWall": [1],
+            },
+            "posZ": {
+                "tileFloor": [0,1,2,3],
+                # "tileWall": [2],
+            },
+            "negZ": {
+                "tileFloor": [0,1,2,3],
+                # "tileWall": [0],
+            },
+        },
+    },
+    # "tileWall": {
+    #     "tileNum": 1,
+    #     "neighbors": {
+    #         "posX": {
+    #             "tileWall": [0],
+    #             "tileWallCorner": [3],
+    #         },
+    #         "negX": {
+    #             "tileWall": [0],
+    #             "tileWallCorner": [0],
+    #         },
+    #         "posZ": {
+    #             "tileFloor": [0,1,2,3],
+    #             "tileWall": [2],
+    #         },
+    #         "negZ": {
+    #             "tileWall": [2],
+    #             "tileWallCorner": [1,2],
+    #         },
+    #     },
+    # },
+    # "tileWallCorner": {
+    #     "tileNum": 2,
+    #     "neighbors": {
+    #         "posX": {
+    #             # "tileFloor": [0,1,2,3],
+    #             "tileWall": [0],
+    #             "tileWallCorner": [3],
+    #         },
+    #         "negX": {
+    #             "tileWall": [3],
+    #             "tileWallCorner": [2,3],
+    #         },
+    #         "posZ": {
+    #             # "tileFloor": [0,1,2,3],
+    #             "tileWall": [1],
+    #             "tileWallCorner": [1],
+    #         },
+    #         "negZ": {
+    #             "tileWall": [2],
+    #             "tileWallCorner": [1,2],
+    #         },
+    #     },
+    # },
+}
+
 def create_adjacency_mappings():
     adjacency_mappings = {}
-
-    # print(tile_rules.items())
 
     # For each tile in the defined rules
     for tile_key, tile_info in tile_rules.items():

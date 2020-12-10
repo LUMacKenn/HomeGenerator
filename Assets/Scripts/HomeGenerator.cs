@@ -11,6 +11,7 @@ public class HomeGenerator : MonoBehaviour
     public GameObject tileFloor;
     public GameObject tileWall;
     public GameObject tileWallCorner;
+    public GameObject tileWallOutsideCorner;
     public GameObject tileWallDoorway;
     public GameObject chairWithFloor;
 
@@ -18,6 +19,7 @@ public class HomeGenerator : MonoBehaviour
     void Start()
     {
         layoutModel = GridGenerator.GenerateLayout(maxWidth, maxHeight);
+        layoutModel = GridGenerator.ReadLayoutFromFile("yey");
         DisplayLayout(layoutModel);
     }
 
@@ -25,7 +27,10 @@ public class HomeGenerator : MonoBehaviour
 
         for (int i = 0; i < layoutModel.GetLength(0); i++) {
             for (int j = 0; j < layoutModel.GetLength(1); j++) {
-                int angle = (int) Random.Range(0f,4f) * 90;
+                int tileCode = layoutModel[i,j];
+                // int angle = (int) Random.Range(0f,4f) * 90;
+                int angle = (tileCode % 4) * 90;
+                int tileType = tileCode / 4;
                 Vector3 center = new Vector3(i * tileSize, 0, j * tileSize);
                 Vector3 diff = new Vector3(0, 0, 0);
                 switch (angle) {
@@ -44,7 +49,7 @@ public class HomeGenerator : MonoBehaviour
                 }
                 Vector3 pos = center + diff;
                 Quaternion rot = Quaternion.Euler(0, angle, 0);
-                switch(layoutModel[i,j]) {
+                switch(tileType) {
                     case 0:
                         Instantiate(tileFloor, pos, rot);
                         break;
@@ -55,7 +60,7 @@ public class HomeGenerator : MonoBehaviour
                         Instantiate(tileWallCorner, pos, rot);
                         break;
                     case 3:
-                        Instantiate(tileWallDoorway, pos, rot);
+                        Instantiate(tileWallOutsideCorner, pos, rot);
                         break;
                     default:
                         break;

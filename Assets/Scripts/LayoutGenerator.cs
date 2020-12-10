@@ -25,4 +25,22 @@ public static class GridGenerator
 
         return layoutModel;
     }
+
+    public static int[,] ReadLayoutFromFile(string fileName) {
+        string[] lines = System.IO.File.ReadAllLines("../Home Generator/Assets/Layouts/layout.txt");
+        int height = lines.Length;
+        int width = lines[0].Trim().Split(' ').Length;
+
+        int[,] layoutModel = new int[height, width];
+        for (int j = 0; j < height; j++) {
+            string[] chars = lines[j].Trim().Split(' ');
+            for (int i = 0; i < width; i++) {
+                int tileNum = int.Parse(chars[i]);
+                layoutModel[i,j] = tileNum;
+            }
+        }
+        // Debug.Log(layoutModel.ToString());
+
+        return layoutModel;
+    }
 }

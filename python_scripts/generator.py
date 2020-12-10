@@ -7,7 +7,7 @@ model = cp_model.CpModel()
 solver = cp_model.CpSolver()
 
 adjacency_mappings = create_adjacency_mappings()
-print(json.dumps(adjacency_mappings, indent=2,))
+# print(json.dumps(adjacency_mappings, indent=2,))
 
 width = 10
 height = 10
@@ -39,8 +39,10 @@ for i in range(width):
                     model.AddBoolOr([grid[i2, j2, k2] for k2 in adjacency_mappings[k]["neighbors"][index]]).OnlyEnforceIf(grid[i, j, k])
 
 # To break symmetry
-model.Add(grid[3,3,10] == True)
-# model.Add(grid[9,9,11] == True)
+# model.Add(grid[0,0,4] == True)
+# model.Add(grid[1,9,5] == True)
+# model.Add(grid[9,9,0] == True)
+model.Add(grid[0,0,13] == True)
 
 if solver.Solve(model) in [cp_model.FEASIBLE, cp_model.OPTIMAL]:
     # file = open("../Assets/Layouts/layout.txt", "w")

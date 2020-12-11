@@ -40,15 +40,6 @@ for i in range(width):
                 if i2 >= 0 and i2 < width and j2 >= 0 and j2 < height:
                     model.AddBoolOr([grid[i2, j2, k2] for k2 in adjacency_mappings[k]["neighbors"][index]]).OnlyEnforceIf(grid[i, j, k])
 
-# Trying to make the layouts more diverse, sort of working
-max_num_of_each_tile = width * height / num_tiles * 2
-for k in range(num_tiles):
-    num_occurances_of_type = sum(grid[i,j,k]
-        for i in range(width)
-        for j in range(height)
-    )
-    model.Add(num_occurances_of_type <= 40) # want this to be variable, not hard-coded
-
 # Limit Number of Tile
 def limit_tile_type(tile_base_num, limit):
         model.Add(sum(grid[i,j,k]
@@ -62,6 +53,11 @@ limit_tile_type(16, 8)
 
 # Limit outside wall corners
 limit_tile_type(12, 16)
+
+# General limit
+# max_num_of_each_tile = width * height / num_tiles * 2
+max_num_of_each_tile = 60
+[limit_tile_type(k, max_num_of_each_tile) for k in range(0, num_tiles, 4) if k not in [8,16,20,24]]
 
 # Add borders
 model.Add(grid[0,0,24] == True)
@@ -77,11 +73,8 @@ for j in range(1, height - 1):
     model.Add(grid[width - 1, j, 23] == True)
 
 # To break symmetry
-model.AddHint(grid[randrange(1, width - 1), randrange(1, height - 1), randrange(0, num_tiles)], True)
-model.AddHint(grid[randrange(1, width - 1), randrange(1, height - 1), randrange(0, num_tiles)], True)
-model.AddHint(grid[randrange(1, width - 1), randrange(1, height - 1), randrange(0, num_tiles)], True)
-model.AddHint(grid[randrange(1, width - 1), randrange(1, height - 1), randrange(0, num_tiles)], True)
-model.AddHint(grid[randrange(1, width - 1), randrange(1, height - 1), randrange(0, num_tiles)], True)
+for i in range(5):
+    model.AddHint(grid[randrange(1, width - 1), randrange(1, height - 1), randrange(0, num_tiles)], True)
 
 if solver.Solve(model) in [cp_model.FEASIBLE, cp_model.OPTIMAL]:
     file_path = os.path.split(os.path.split(os.path.abspath(__file__))[0])[0] + "/Assets/Layouts/layout.txt"

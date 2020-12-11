@@ -216,9 +216,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 1314305821}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df677178442bb43e794471961d621f72, type: 3}
+  m_Script: {fileID: 11500000, guid: 436275a13d4459746955fc6db5953473, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _active: 1
+  _enableRotation: 1
+  _mouseSense: 4
+  _enableTranslation: 1
+  _translationSpeed: 55
+  _enableMovement: 1
+  _movementSpeed: 50
+  _boostedSpeed: 50
+  _boostSpeed: 9
+  _moveUp: 32
+  _moveDown: 304
+  _enableSpeedAcceleration: 0
+  _speedAccelerationFactor: 1.5
+  _initPositonButton: 114
 --- !u!1 &1784358878
 GameObject:
   m_ObjectHideFlags: 0
@@ -346,8 +360,10 @@ MonoBehaviour:
   tileFloor: {fileID: 4321056929760304910, guid: c045cdc0aee6340768b1e2de8ad2d807, type: 3}
   tileWall: {fileID: 862527094559833302, guid: 7914132fcfdce431b883c041c10f4f77, type: 3}
   tileWallCorner: {fileID: 5224993104449871344, guid: 2ccb91d489a9f4a2bb60542ce543c0d7, type: 3}
-  tileWallOutsideCorner: {fileID: 0}
+  tileWallOutsideCorner: {fileID: 267990319571938545, guid: 56d1396609cd54d9abe284c44e04e446, type: 3}
   tileWallDoorway: {fileID: 1632163859708327742, guid: 187d90cde33354fd68a313f361de6bf2, type: 3}
+  tileBorderWall: {fileID: 8607849969930534233, guid: d54061d3997094b35a65f27b0792780b, type: 3}
+  chairWithFloor: {fileID: 0}
 --- !u!4 &1953732318
 Transform:
   m_ObjectHideFlags: 0

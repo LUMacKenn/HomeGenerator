@@ -52,10 +52,7 @@ for i in range(width):
 # Exactly one true boolean per 2D grid space
 for i in range(width):
     for j in range(height):
-        # num_tiles_in_spot = model.NewIntVar(0, num_tiles, f"num_tiles[{i}][{j}]")
-        num_tiles_in_spot = model.NewIntVar(0, num_tiles, "num_tils[%s, %s]" % (i, j))
-        num_tiles_in_spot = sum([grid[i,j,k] for k in range(num_tiles)])
-        model.Add(num_tiles_in_spot == 1)
+        model.Add(sum([grid[i,j,k] for k in range(num_tiles)]) == 1)
 
 # All adjacent tile constraints
 for i in range(width):
@@ -100,7 +97,7 @@ for j in range(1, height - 1):
     model.Add(grid[width - 1, j, 23] == True)
 
 # To break symmetry
-for i in range(5):
+for i in range(7):
     model.AddHint(grid[randrange(1, width - 1), randrange(1, height - 1), randrange(0, num_tiles)], True)
 
 if solver.Solve(model) in [cp_model.FEASIBLE, cp_model.OPTIMAL]:

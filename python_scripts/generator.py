@@ -47,7 +47,7 @@ for k in range(num_tiles):
         for i in range(width)
         for j in range(height)
     )
-    model.Add(num_occurances_of_type <= 20)
+    model.Add(num_occurances_of_type <= 40) # want this to be variable, not hard-coded
 
 # Limit Number of Doors
 min_doors = 5
@@ -62,12 +62,25 @@ horizontal_doors = sum(grid[i,j,17]
 model.Add(vertical_doors + horizontal_doors <= min_doors)
 
 
+# Add borders
+model.Add(grid[0,0,24] == True)
+model.Add(grid[0, height - 1, 24] == True)
+model.Add(grid[width - 1, 0, 24] == True)
+model.Add(grid[width - 1, height - 1, 24] == True)
+model.Add(grid[5,0,20] == True)
+for i in range(1, width - 1):
+    model.Add(grid[i, 0, 20] == True)
+    model.Add(grid[i, height-1, 22] == True)
+for j in range(1, height - 1):
+    model.Add(grid[0, j, 21] == True)
+    model.Add(grid[width - 1, j, 23] == True)
+
 # To break symmetry
-model.AddHint(grid[randrange(0, width), randrange(0, height), randrange(0, num_tiles)], True)
-model.AddHint(grid[randrange(0, width), randrange(0, height), randrange(0, num_tiles)], True)
-model.AddHint(grid[randrange(0, width), randrange(0, height), randrange(0, num_tiles)], True)
-model.AddHint(grid[randrange(0, width), randrange(0, height), randrange(0, num_tiles)], True)
-model.AddHint(grid[randrange(0, width), randrange(0, height), randrange(0, num_tiles)], True)
+model.AddHint(grid[randrange(1, width - 1), randrange(1, height - 1), randrange(0, num_tiles)], True)
+model.AddHint(grid[randrange(1, width - 1), randrange(1, height - 1), randrange(0, num_tiles)], True)
+model.AddHint(grid[randrange(1, width - 1), randrange(1, height - 1), randrange(0, num_tiles)], True)
+model.AddHint(grid[randrange(1, width - 1), randrange(1, height - 1), randrange(0, num_tiles)], True)
+model.AddHint(grid[randrange(1, width - 1), randrange(1, height - 1), randrange(0, num_tiles)], True)
 
 if solver.Solve(model) in [cp_model.FEASIBLE, cp_model.OPTIMAL]:
     file_path = os.path.split(os.path.split(os.path.abspath(__file__))[0])[0] + "/Assets/Layouts/layout.txt"
@@ -78,13 +91,13 @@ if solver.Solve(model) in [cp_model.FEASIBLE, cp_model.OPTIMAL]:
             for k in range(num_tiles):
                 if solver.Value(grid[i,j,k]) == 1:
                     line += f"{k}"
-                    if j == height - 1:
-                        line += "\n"
-                    else:
+                    if j < height - 1:
                         line += " "
+                    else:
+                        line += "\n"
         # print(line)
         file.write(line)
     file.close()
-    print("New Layout Created")
+    print("New Layout Created!")
 else:
     print("Not Feasible")

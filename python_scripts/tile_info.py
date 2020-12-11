@@ -52,6 +52,7 @@ tile_rules = {
             "negZ": {
                 "tileWall": [2],
                 "tileWallCorner": [1,2],
+                "tileBorderWall": [0],
             },
         },
     },
@@ -67,6 +68,7 @@ tile_rules = {
             "negX": {
                 "tileWall": [3],
                 "tileWallCorner": [2,3],
+                "tileBorderWall": [1],
             },
             "posZ": {
                 "tileWall": [1],
@@ -77,6 +79,7 @@ tile_rules = {
             "negZ": {
                 "tileWall": [2],
                 "tileWallCorner": [1,2],
+                "tileBorderWall": [0],
             },
         },
     },
@@ -132,6 +135,47 @@ tile_rules = {
             },
             "negZ": {
                 "tileDoorway": [2],
+            },
+        },
+    },
+    "tileBorderWall": {
+        "tileNum": 5,
+        "neighbors": {
+            "posX": {
+                "tileBorderWall": [0],
+                "tileEmpty": [0,1,2,3],
+            },
+            "negX": {
+                "tileBorderWall": [0],
+                "tileEmpty": [0,1,2,3],
+            },
+            "posZ": {
+                "tileWall": [0],
+                "tileWallCorner": [0,3],
+            },
+            "negZ": {
+                "tileEmpty": [0,1,2,3],
+            },
+        },
+    },
+    "tileEmpty": {
+        "tileNum": 6,
+        "neighbors": {
+            "posX": {
+                "tileBorderWall": [0,1,2,3],  # Will change this probably
+                "tileEmpty": [0,1,2,3],
+            },
+            "negX": {
+                "tileBorderWall": [0,1,2,3], # Will change this probably
+                "tileEmpty": [0,1,2,3],
+            },
+            "posZ": {
+                "tileBorderWall": [0,1,2,3], # Will change this probably
+                "tileEmpty": [0,1,2,3],
+            },
+            "negZ": {
+                "tileBorderWall": [0,1,2,3], # Will change this probably
+                "tileEmpty": [0,1,2,3],
             },
         },
     },

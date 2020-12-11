@@ -20,7 +20,7 @@ public class HomeGenerator : MonoBehaviour
     void Start()
     {
         //Debug.Log("hello start")
-        layoutModel = GridGenerator.GenerateLayout(maxWidth, maxHeight);
+        //layoutModel = GridGenerator.GenerateLayout(maxWidth, maxHeight);
         layoutModel = GridGenerator.ReadLayoutFromFile("layout2.txt");
         lampLayoutModel = GridGenerator.ReadLayoutFromFile("lampLayout.txt");
         boundaries = GridGenerator.SetBoundaries(maxWidth, maxHeight); 
@@ -81,7 +81,7 @@ public class HomeGenerator : MonoBehaviour
             for (int j = 0; j < layout.GetLength(1); j++) {
                 int hasLamp = layout[i, j]; 
                 if (hasLamp == 1) {
-                    Vector3 pos = new Vector3(i * tileSize - 5 , (float) 0.5, j * tileSize - 5);
+                    Vector3 pos = new Vector3(i * tileSize -10 , (float) 0.5, j * tileSize -10);
                     Instantiate(lamp, pos, Quaternion.identity);
                 }
       

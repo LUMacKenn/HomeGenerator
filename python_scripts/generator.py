@@ -1,5 +1,7 @@
 from ortools.sat.python import cp_model
 from random import randrange
+import os
+import sys
 import json
 
 from tile_info import create_adjacency_mappings
@@ -10,8 +12,8 @@ solver = cp_model.CpSolver()
 adjacency_mappings = create_adjacency_mappings()
 # print(json.dumps(adjacency_mappings, indent=2,))
 
-width = 10
-height = 10
+width = 15
+height = 15
 num_tiles = len(adjacency_mappings)
 grid = {}
 
@@ -38,22 +40,27 @@ for i in range(width):
                 if i2 >= 0 and i2 < width and j2 >= 0 and j2 < height:
                     model.AddBoolOr([grid[i2, j2, k2] for k2 in adjacency_mappings[k]["neighbors"][index]]).OnlyEnforceIf(grid[i, j, k])
 
-# Trying to make the layouts more diverse, not really working yet
-# type_of_each = []
+# Trying to make the layouts more diverse, sort of working
+max_num_of_each_tile = width * height / num_tiles * 2
 for k in range(num_tiles):
     num_occurances_of_type = sum(grid[i,j,k]
         for i in range(width)
         for j in range(height)
     )
-    # type_of_each.append(num_occurances_of_type)
-    model.Add(num_occurances_of_type <= 7)
-# avg = sum(type_of_each)/len(type_of_each)
-# avg = model.NewIntVar(0, width * height, "")
-# sum1 = sum(type_of_each)
-# len1 = len(type_of_each)
-# model.AddDivisionEquality(avg, sum1, len1)
-# deltas = [abs(val - avg) for val in type_of_each]
-# model.Minimize(sum(deltas))
+    model.Add(num_occurances_of_type <= 20)
+
+# Limit Number of Doors
+min_doors = 5
+vertical_doors = sum(grid[i,j,16]
+    for i in range(width)
+    for j in range(height)
+)
+horizontal_doors = sum(grid[i,j,17]
+    for i in range(width)
+    for j in range(height)
+)
+model.Add(vertical_doors + horizontal_doors <= min_doors)
+
 
 # To break symmetry
 model.AddHint(grid[randrange(0, width), randrange(0, height), randrange(0, num_tiles)], True)
@@ -61,19 +68,23 @@ model.AddHint(grid[randrange(0, width), randrange(0, height), randrange(0, num_t
 model.AddHint(grid[randrange(0, width), randrange(0, height), randrange(0, num_tiles)], True)
 model.AddHint(grid[randrange(0, width), randrange(0, height), randrange(0, num_tiles)], True)
 model.AddHint(grid[randrange(0, width), randrange(0, height), randrange(0, num_tiles)], True)
-# model.Add(grid[0,0,8] == True)
-# model.Add(grid[1,0,4] == True)
 
 if solver.Solve(model) in [cp_model.FEASIBLE, cp_model.OPTIMAL]:
-    # file = open("../Assets/Layouts/layout.txt", "w")
+    file_path = os.path.split(os.path.split(os.path.abspath(__file__))[0])[0] + "/Assets/Layouts/layout.txt"
+    file = open(file_path, "w")
     for i in range(width):
         line = ""
         for j in range(height):
             for k in range(num_tiles):
                 if solver.Value(grid[i,j,k]) == 1:
-                    line += f"{k} "
-        print(line)
-        # file.write(line)
-    # file.close()
+                    line += f"{k}"
+                    if j == height - 1:
+                        line += "\n"
+                    else:
+                        line += " "
+        # print(line)
+        file.write(line)
+    file.close()
+    print("New Layout Created")
 else:
     print("Not Feasible")

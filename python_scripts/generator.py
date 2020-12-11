@@ -76,18 +76,19 @@ for k in range(num_tiles):
     )
     model.Add(num_occurances_of_type <= 40) # want this to be variable, not hard-coded
 
-# Limit Number of Doors
-min_doors = 5
-vertical_doors = sum(grid[i,j,16]
-    for i in range(width)
-    for j in range(height)
-)
-horizontal_doors = sum(grid[i,j,17]
-    for i in range(width)
-    for j in range(height)
-)
-model.Add(vertical_doors + horizontal_doors <= min_doors)
+# Limit Number of Tile
+def limit_tile_type(tile_base_num, limit):
+        model.Add(sum(grid[i,j,k]
+            for i in range(width)
+            for j in range(height)
+            for k in range(tile_base_num, tile_base_num + 4)
+        ) <= limit)
 
+# Limit Doors
+limit_tile_type(16, 8)
+
+# Limit outside wall corners
+limit_tile_type(12, 16)
 
 # Add borders
 model.Add(grid[0,0,24] == True)

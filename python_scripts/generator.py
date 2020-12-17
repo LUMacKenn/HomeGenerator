@@ -12,8 +12,33 @@ solver = cp_model.CpSolver()
 adjacency_mappings = create_adjacency_mappings()
 # print(json.dumps(adjacency_mappings, indent=2,))
 
-width = 15
-height = 15
+width = 0
+height = 0
+while True: 
+    try: 
+        
+        width = input("What is your desired width? ")
+        height = input("What is your desired height? ")
+    except NameError: 
+        print("Not a number! Try again")
+    except ValueError: 
+        print("Not a number! Try again")
+    except SyntaxError: 
+        print("Not a number! Try again")
+
+    
+    else: 
+        if width < 5: 
+            print("Width must be greater than 4. Let's try again.")
+        elif height < 5: 
+            print("Height must be greater than 4. Let's try again.")
+        else: 
+            break
+
+# add 2 for borders
+width += 2
+height += 2
+
 num_tiles = len(adjacency_mappings)
 grid = {}
 
@@ -87,14 +112,17 @@ model.AddHint(grid[randrange(1, width - 1), randrange(1, height - 1), randrange(
 if solver.Solve(model) in [cp_model.FEASIBLE, cp_model.OPTIMAL]:
     file_path = os.path.split(os.path.split(os.path.abspath(__file__))[0])[0] + "/Assets/Layouts/layout.txt"
     file = open(file_path, "w")
-    for i in range(width):
+    for j in range(height): 
+    # for i in range(width):
         line = ""
-        for j in range(height):
+        for i in range(width): 
+        # for j in range(height):
             for k in range(num_tiles):
                 if solver.Value(grid[i,j,k]) == 1:
                     # line += f"{k}"
                     line += "%s" % (k)
-                    if j < height - 1:
+                    if i < width - 1: 
+                    # if j < height - 1:
                         line += " "
                     else:
                         line += "\n"

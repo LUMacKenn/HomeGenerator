@@ -22,22 +22,24 @@ public static class GridGenerator
                 }
             }
         }
-        //Debug.Log("generated")
 
         return layoutModel;
     }
 
     public static int[,] ReadLayoutFromFile(string fileName) {
-        //Debug.Log("wow");
         string[] lines = System.IO.File.ReadAllLines($"../HomeGenerator/Assets/Layouts/{fileName}");
         int height = lines.Length;
         int width = lines[0].Trim().Split(' ').Length;
 
-        int[,] layoutModel = new int[height, width];
-        for (int i = 0; i < width; i++) {
-            string[] chars = lines[i].Trim().Split(' ');
-            for (int j = 0; j < height; j++) {
-                int tileNum = int.Parse(chars[j]);
+        //int[,] layoutModel = new int[height, width];
+        int[,] layoutModel = new int[width, height];
+        // for (int i = 0; i < width; i++) {
+        for (int j = 0; j < height; j++) {
+            string[] chars = lines[j].Trim().Split(' ');
+            //for (int j = 0; j < height; j++) {
+            for (int i = 0; i < width; i++) {
+
+                int tileNum = int.Parse(chars[i]);
                 layoutModel[i,j] = tileNum;
             }
         }

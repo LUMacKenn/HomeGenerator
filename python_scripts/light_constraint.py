@@ -6,10 +6,21 @@ model = cp_model.CpModel()
 solver = cp_model.CpSolver()
 
 grid = {}
+max_lamps = 0
+while True: 
+    try: 
+        max_lamps = input("How many lamps should there be? ")
+    except NameError: 
+        print("Not a number! Try again")
+    except ValueError: 
+        print("Not a number! Try again")
+    except SyntaxError: 
+        print("Not a number! Try again")
 
-# width = 10
-# height = 10
-max_lamps = 15
+    else: 
+        break
+
+
 
 # note where the walls are 
 file = open("../HomeGenerator/Assets/Layouts/layout.txt", "r")
@@ -29,18 +40,11 @@ for i in range(1, width + 1):
         grid[i, j]["wallBottom"] = False
         grid[i, j]["wallLeft"] = False
 
-# # walls on the edges
-# for i in range(width): 
-#     grid[1, i]["wallTop"] = True
-#     grid[height - 2, i]["wallBottom"] = True
-#     grid[i, 1]["wallLeft"] = True
-#     grid[i, width - 2]["wallRight"] = True
-
-for i in range(1, height + 1): 
-    line = lines[i]
+for j in range(1, height + 1): 
+    line = lines[j]
     chars = line.split()
-    for j in range(1, width + 1): 
-        char = chars[j]
+    for i in range(1, width + 1): 
+        char = chars[i]
         val = int(char)
         currPos = grid[i,j]
         if val == 4 or val == 16: 
@@ -143,7 +147,7 @@ model.Maximize(total_score)
         
 if solver.Solve(model) in [cp_model.FEASIBLE, cp_model.OPTIMAL]:
     file_path = os.path.split(os.path.split(os.path.abspath(__file__))[0])[0] + "/Assets/Layouts/lampLayout.txt"
-    print(solver.Value(total_score))
+    print("lightscore: %s" % solver.Value(total_score))
     file = open(file_path, "w")
 
     # add 2 to widths and heights to account again for border tiles
@@ -154,20 +158,22 @@ if solver.Solve(model) in [cp_model.FEASIBLE, cp_model.OPTIMAL]:
     file.write(first_last_row)
     
     # set first and last width vals as 0 - border tiles
-    for i in range(1, width + 1): 
+    for j in range(1, height + 1): 
+    # for i in range(1, width + 1): 
         line = "0 "
-        for j in range(1, height + 1): 
+        for i in range(1, width + 1): 
+        # for j in range(1, height + 1): 
             if solver.Value(hasLamp[i, j]) == 1: 
                 line += "1 "
             else: 
                 line += "0 "
-            if j == height: 
+            if i == width: 
                 line += "0 \n"
         # print(line)
         file.write(line)
     file.write(first_last_row)
-    print("New Lights Layout Created!")
-    print(solver.ResponseStats())
+    print("Lamps Added!")
+    # print(solver.ResponseStats())
 else:
     print("Not Feasible")
 

@@ -9,7 +9,7 @@ grid = {}
 max_lamps = 0
 while True: 
     try: 
-        max_lamps = input("How many lamps should there be? ")
+        max_lamps = int(input("How many lamps should there be? "))
     except NameError: 
         print("Not a number! Try again")
     except ValueError: 
@@ -23,7 +23,8 @@ while True:
 
 
 # note where the walls are 
-file = open("../HomeGenerator/Assets/Layouts/layout.txt", "r")
+file_path = os.path.split(os.path.split(os.path.abspath(__file__))[0])[0] + "/Assets/Layouts/layout.txt"
+file = open(file_path, "r")
 
 lines = file.readlines()
 

@@ -17,8 +17,8 @@ height = 0
 while True: 
     try: 
         
-        width = input("What is your desired width? ")
-        height = input("What is your desired height? ")
+        width = int(input("What is your desired width? "))
+        height = int(input("What is your desired height? "))
     except NameError: 
         print("Not a number! Try again")
     except ValueError: 

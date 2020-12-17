@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class GridGenerator
+public static class LayoutGenerator
 {
     public static int[,] GenerateLayout(int maxWidth, int maxHeight) {
 
@@ -27,7 +27,10 @@ public static class GridGenerator
     }
 
     public static int[,] ReadLayoutFromFile(string fileName) {
-        string[] lines = System.IO.File.ReadAllLines($"../HomeGenerator/Assets/Layouts/{fileName}");
+        // string filePath = $"../HomeGenerator/Assets/Layouts/{fileName}";
+        string filePath = $"../HomeGenerator/Assets/Layouts/layout.txt";
+        Debug.Log(filePath);
+        string[] lines = System.IO.File.ReadAllLines(filePath);
         int height = lines.Length;
         int width = lines[0].Trim().Split(' ').Length;
 

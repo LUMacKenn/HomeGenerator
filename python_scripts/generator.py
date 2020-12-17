@@ -21,12 +21,14 @@ grid = {}
 for i in range(width):
     for j in range(height):
         for k in range(num_tiles):
-            grid[i,j,k] = model.NewBoolVar(f"[{i},{j}]:{k}")
+            # grid[i,j,k] = model.NewBoolVar(f"[{i},{j}]:{k}")
+            grid[i,j,k] = model.NewBoolVar("[%s, %s]: %s" % (i, j, k))
 
 # Exactly one true boolean per 2D grid space
 for i in range(width):
     for j in range(height):
-        num_tiles_in_spot = model.NewIntVar(0, num_tiles, f"num_tiles[{i}][{j}]")
+        # num_tiles_in_spot = model.NewIntVar(0, num_tiles, f"num_tiles[{i}][{j}]")
+        num_tiles_in_spot = model.NewIntVar(0, num_tiles, "num_tils[%s, %s]" % (i, j))
         num_tiles_in_spot = sum([grid[i,j,k] for k in range(num_tiles)])
         model.Add(num_tiles_in_spot == 1)
 
@@ -90,7 +92,8 @@ if solver.Solve(model) in [cp_model.FEASIBLE, cp_model.OPTIMAL]:
         for j in range(height):
             for k in range(num_tiles):
                 if solver.Value(grid[i,j,k]) == 1:
-                    line += f"{k}"
+                    # line += f"{k}"
+                    line += "%s" % (k)
                     if j < height - 1:
                         line += " "
                     else:

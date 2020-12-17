@@ -362,6 +362,7 @@ MonoBehaviour:
   tileWallCorner: {fileID: 5224993104449871344, guid: 2ccb91d489a9f4a2bb60542ce543c0d7, type: 3}
   tileWallOutsideCorner: {fileID: 267990319571938545, guid: 56d1396609cd54d9abe284c44e04e446, type: 3}
   tileWallDoorway: {fileID: 1632163859708327742, guid: 187d90cde33354fd68a313f361de6bf2, type: 3}
+  lamp: {fileID: 89853471113173291, guid: 8a95be2f896334ddbaa0edccd6e49127, type: 3}
   tileBorderWall: {fileID: 8607849969930534233, guid: d54061d3997094b35a65f27b0792780b, type: 3}
   chairWithFloor: {fileID: 0}
 --- !u!4 &1953732318

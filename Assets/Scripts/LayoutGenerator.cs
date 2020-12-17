@@ -22,12 +22,14 @@ public static class GridGenerator
                 }
             }
         }
+        //Debug.Log("generated")
 
         return layoutModel;
     }
 
     public static int[,] ReadLayoutFromFile(string fileName) {
-        string[] lines = System.IO.File.ReadAllLines("../Home Generator/Assets/Layouts/layout.txt");
+        //Debug.Log("wow");
+        string[] lines = System.IO.File.ReadAllLines($"../HomeGenerator/Assets/Layouts/{fileName}");
         int height = lines.Length;
         int width = lines[0].Trim().Split(' ').Length;
 
@@ -39,7 +41,7 @@ public static class GridGenerator
                 layoutModel[i,j] = tileNum;
             }
         }
-        // Debug.Log(layoutModel.ToString());
+        
 
         return layoutModel;
     }

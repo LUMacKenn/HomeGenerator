@@ -43,13 +43,13 @@ for i in range(1, height + 1):
         char = chars[j]
         val = int(char)
         currPos = grid[i,j]
-        if val == 4: 
+        if val == 4 or val == 16: 
             currPos["wallLeft"] = True
-        if val == 5: 
+        if val == 5 or val == 17: 
             currPos["wallTop"] = True
-        if val == 6: 
+        if val == 6 or val == 18: 
             currPos["wallRight"] = True
-        if val == 7: 
+        if val == 7 or val == 19: 
             currPos["wallBottom"] = True
         if val == 8: 
             currPos["wallLeft"] = True
@@ -63,6 +63,7 @@ for i in range(1, height + 1):
         if val == 11: 
             currPos["wallLeft"] = True
             currPos["wallBottom"] = True
+        
 
 hasLamp = {}
 for i in range(1, width + 1): 

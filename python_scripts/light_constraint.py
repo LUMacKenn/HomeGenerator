@@ -65,7 +65,6 @@ for i in range(1, height + 1):
             currPos["wallBottom"] = True
 
 hasLamp = {}
-lightScore = {}
 for i in range(1, width + 1): 
     for j in range(1, height + 1): 
         hasLamp[i, j] = model.NewBoolVar("hasLamp[%s, %s]" % (i, j))
@@ -74,9 +73,8 @@ SAME_TILE_SCORE = 40
 RADIUS_ONE_SCORE = 30
 RADIUS_TWO_SCORE = 20
 
-total_score = model.NewIntVar(0, 10000, "total_light_scores")
-# total_score = 0
-# total_scores = []
+# total_score = model.NewIntVar(0, 10000, "total_light_scores")
+total_score = 0
 
 def addScore(posX, posY, scores, score): 
     lightscore = model.NewIntVar(0, 100, "light score of grid [%s, %s]" % (posX, posY))
@@ -91,7 +89,6 @@ for i in range(1, width + 1):
         # check if lamp in curr grid pos
         addScore(i, j, scores, SAME_TILE_SCORE)
 
-        # check first radius and second radius (direct)
         if currPos["wallTop"] is False: 
             addScore(i - 1, j, scores, RADIUS_ONE_SCORE)
             nextPos = grid[i - 1, j]
@@ -133,20 +130,20 @@ for i in range(1, width + 1):
         if currPos["wallBottom"] is False and currPos["wallLeft"] is False: 
             addScore(i + 1, j - 1, scores, RADIUS_TWO_SCORE)
 
+        # limit total score that a tile can get - for spacing purposes 
         sum_scores = model.NewIntVar(0, 50, "sum_scores for grid[%s, %s]" % (i, j))
         model.Add(sum_scores == sum(scores))
         total_score += sum_scores
 
 sum_lamps = model.NewIntVar(0, width*height, "sum_lamps")
 model.Add(sum_lamps == sum(hasLamp[i, j] for i in range(1, width + 1) for j in range(1, height + 1)))
-model.Add(sum_lamps == max_lamps)
+model.Add(sum_lamps <= max_lamps)
 model.Maximize(total_score)
         
 if solver.Solve(model) in [cp_model.FEASIBLE, cp_model.OPTIMAL]:
     file_path = os.path.split(os.path.split(os.path.abspath(__file__))[0])[0] + "/Assets/Layouts/lampLayout.txt"
     print(solver.Value(total_score))
     file = open(file_path, "w")
-
 
     # add 2 to widths and heights to account again for border tiles
     first_last_row = ""

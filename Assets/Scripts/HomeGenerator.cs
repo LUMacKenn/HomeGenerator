@@ -23,8 +23,8 @@ public class HomeGenerator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        layoutModel = GridGenerator.ReadLayoutFromFile("layout.txt");
-        lampLayoutModel = GridGenerator.ReadLayoutFromFile("lampLayout.txt");
+        layoutModel = LayoutGenerator.ReadLayoutFromFile("layout.txt");
+        lampLayoutModel = LayoutGenerator.ReadLayoutFromFile("lampLayout.txt");
         DisplayLayout(layoutModel);
         DisplayFurniture(lampLayoutModel); 
     }

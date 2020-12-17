@@ -22,15 +22,10 @@ public class HomeGenerator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //Debug.Log("hello start")
-        //layoutModel = GridGenerator.GenerateLayout(maxWidth, maxHeight);
-        layoutModel = GridGenerator.ReadLayoutFromFile("layout2.txt");
+        layoutModel = GridGenerator.ReadLayoutFromFile("layout.txt");
         lampLayoutModel = GridGenerator.ReadLayoutFromFile("lampLayout.txt");
-        boundaries = GridGenerator.SetBoundaries(maxWidth, maxHeight); 
         DisplayLayout(layoutModel);
-        DisplayLayout(boundaries);
         DisplayFurniture(lampLayoutModel); 
-        //DisplayFurniture()
     }
 
     void DisplayLayout(int[,] layoutModel) {
@@ -90,8 +85,9 @@ public class HomeGenerator : MonoBehaviour
             for (int j = 0; j < layout.GetLength(1); j++) {
                 int hasLamp = layout[i, j]; 
                 if (hasLamp == 1) {
-                    Vector3 pos = new Vector3(i * tileSize -10 , (float) 0.5, j * tileSize -10);
-                    Instantiate(lamp, pos, Quaternion.identity);
+                    Vector3 pos = new Vector3(i * tileSize, (float) 0.5, j * tileSize);
+                    Quaternion rot = Quaternion.Euler(0, 0, 0);
+                    Instantiate(lamp, pos, rot);
                 }
       
             }

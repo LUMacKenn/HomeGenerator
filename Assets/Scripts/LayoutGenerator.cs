@@ -28,7 +28,7 @@ public static class GridGenerator
     }
 
     public static int[,] ReadLayoutFromFile(string fileName) {
-        Debug.Log("wow");
+        //Debug.Log("wow");
         string[] lines = System.IO.File.ReadAllLines($"../HomeGenerator/Assets/Layouts/{fileName}");
         int height = lines.Length;
         int width = lines[0].Trim().Split(' ').Length;
@@ -42,33 +42,6 @@ public static class GridGenerator
             }
         }
         
-
-        return layoutModel;
-    }
-
-    public static int[,] SetBoundaries(int maxWidth, int maxHeight) {
-
-        int[,] layoutModel = new int[maxHeight, maxWidth];
-        
-        for (int i = 1; i < maxWidth - 1; i++) {
-            // first and last rows 
-            layoutModel[i, 0] = 4;
-            layoutModel[i, maxHeight - 1] = 6;
-        }
-
-        for (int j = 1; j < maxHeight - 1; j++) {
-            // first and last columns 
-            layoutModel[0, j] = 5;
-            layoutModel[maxWidth - 1, j] = 7;
-        }
-        // set corners
-        layoutModel[0, 0] = 8;
-        layoutModel[0, maxHeight - 1] = 9;
-        layoutModel[maxWidth - 1, 0] = 11;
-        layoutModel[maxWidth - 1, maxHeight - 1] = 10;
-
-
-        //Debug.Log("generated")
 
         return layoutModel;
     }

@@ -22,13 +22,13 @@ for i in range(width):
     for j in range(height):
         for k in range(num_tiles):
             # grid[i,j,k] = model.NewBoolVar(f"[{i},{j}]:{k}")
-            grid[i,j,k] = model.NewBoolVar("hi")
+            grid[i,j,k] = model.NewBoolVar("[%s, %s]: %s" % (i, j, k))
 
 # Exactly one true boolean per 2D grid space
 for i in range(width):
     for j in range(height):
         # num_tiles_in_spot = model.NewIntVar(0, num_tiles, f"num_tiles[{i}][{j}]")
-        num_tiles_in_spot = model.NewIntVar(0, num_tiles, "hi")
+        num_tiles_in_spot = model.NewIntVar(0, num_tiles, "num_tils[%s, %s]" % (i, j))
         num_tiles_in_spot = sum([grid[i,j,k] for k in range(num_tiles)])
         model.Add(num_tiles_in_spot == 1)
 
@@ -85,16 +85,15 @@ model.AddHint(grid[randrange(1, width - 1), randrange(1, height - 1), randrange(
 model.AddHint(grid[randrange(1, width - 1), randrange(1, height - 1), randrange(0, num_tiles)], True)
 
 if solver.Solve(model) in [cp_model.FEASIBLE, cp_model.OPTIMAL]:
+    file_path = os.path.split(os.path.split(os.path.abspath(__file__))[0])[0] + "/Assets/Layouts/layout.txt"
+    file = open(file_path, "w")
+    for i in range(width):
+        line = ""
         for j in range(height):
             for k in range(num_tiles):
                 if solver.Value(grid[i,j,k]) == 1:
-                    line += "%s " % (k)
-                    # line += f"{k} "
-        print(line)
-        #file.write(line)
-    #file.close()
-=======
-                    line += f"{k}"
+                    # line += f"{k}"
+                    line += "%s" % (k)
                     if j < height - 1:
                         line += " "
                     else:
@@ -103,6 +102,5 @@ if solver.Solve(model) in [cp_model.FEASIBLE, cp_model.OPTIMAL]:
         file.write(line)
     file.close()
     print("New Layout Created!")
->>>>>>> 42b79e8eb6cfd864028bacf21c6b5658cc5a281a
 else:
     print("Not Feasible")

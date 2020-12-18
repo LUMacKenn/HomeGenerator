@@ -16,7 +16,6 @@ width = 0
 height = 0
 while True: 
     try: 
-        
         width = int(input("What is your desired width? "))
         height = int(input("What is your desired height? "))
     except NameError: 
@@ -25,7 +24,6 @@ while True:
         print("Not a number! Try again")
     except SyntaxError: 
         print("Not a number! Try again")
-
     
     else: 
         if width < 5: 
@@ -88,7 +86,6 @@ model.Add(grid[0,0,24] == True)
 model.Add(grid[0, height - 1, 24] == True)
 model.Add(grid[width - 1, 0, 24] == True)
 model.Add(grid[width - 1, height - 1, 24] == True)
-# model.Add(grid[5,0,20] == True)
 for i in range(1, width - 1):
     model.Add(grid[i, 0, 20] == True)
     model.Add(grid[i, height-1, 22] == True)

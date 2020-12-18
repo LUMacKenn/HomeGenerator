@@ -27,8 +27,8 @@ public static class LayoutGenerator
     }
 
     public static int[,] ReadLayoutFromFile(string fileName) {
-        // string filePath = $"../HomeGenerator/Assets/Layouts/{fileName}";
-        string filePath = $"../HomeGenerator/Assets/Layouts/layout.txt";
+        string filePath = $"../HomeGenerator/Assets/Layouts/{fileName}";
+        // string filePath = $"../HomeGenerator/Assets/Layouts/layout.txt";
         Debug.Log(filePath);
         string[] lines = System.IO.File.ReadAllLines(filePath);
         int height = lines.Length;

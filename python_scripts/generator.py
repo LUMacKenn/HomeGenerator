@@ -88,7 +88,7 @@ model.Add(grid[0,0,24] == True)
 model.Add(grid[0, height - 1, 24] == True)
 model.Add(grid[width - 1, 0, 24] == True)
 model.Add(grid[width - 1, height - 1, 24] == True)
-model.Add(grid[5,0,20] == True)
+# model.Add(grid[5,0,20] == True)
 for i in range(1, width - 1):
     model.Add(grid[i, 0, 20] == True)
     model.Add(grid[i, height-1, 22] == True)

@@ -186,8 +186,8 @@ public class FreeFlyCamera : MonoBehaviour
                 deltaPosition -= transform.up;
 
             // This keybind is my own code
-            if (Input.GetKey(KeyCode.Escape))
-                UnityEditor.EditorApplication.isPlaying = false;
+            // if (Input.GetKey(KeyCode.Escape))
+            //     UnityEditor.EditorApplication.isPlaying = false;
 
             // Calc acceleration
             CalculateCurrentIncrease(deltaPosition != Vector3.zero);

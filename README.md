@@ -17,7 +17,7 @@ We have plans to streamline the process of running the code; for now the process
     1. Run the python file `start.py`: if you are in the root project directory, this will be `python3 python_scripts/start.py`
     2. Follow the command line prompts to choose layout features (this is somewhat limited at the moment)
 3. Run HomeGenerator application
-    1. If HomeGenerator.app is present in the root project directory, run this application to see the generated layout!
+    1. If HomeGenerator.app is present in the root project directory, run this application to see the generated layout! Note: we are experiencing weird problems where we have to drag this file out of the project folder, then back in for it to work. We don't know why but currently you'll probably have to do this for it to work properly.
     2. If HomeGenerator.app is not present (not included on GitHub), you can run the `GeneratorScene` in the Unity Editor or create the project build in Unity yourself.
     3. Type cmd+q to exit the application
 
